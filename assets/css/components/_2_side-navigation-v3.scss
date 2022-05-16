@@ -1,0 +1,123 @@
+@use '../base' as *;
+@use '_1_responsive-sidebar.scss' as *;
+@use '_1_expandable-side-navigation.scss' as *;
+
+/* --------------------------------
+
+File#: _2_side-navigation-v3
+Title: Side Navigation v3
+Descr: A primary navigation located in the sidebar
+Usage: codyhouse.co/license
+
+-------------------------------- */
+
+:root {
+  --side-template-mobile-header-height: 50px;
+  --side-template-desktop-header-height: 64px;
+}
+
+.side-template-v3 {
+  @include breakpoint(md, "not all") {
+    .sidebar {
+      --space-unit: 1.2rem;
+      --text-unit: 1.2rem;
+      font-size: var(--text-unit);
+    }
+  }
+}
+
+/* mobile header - hidden on bigger screens */
+.side-template-v3__mobile-header {
+  background: var(--color-bg-light);
+  height: var(--side-template-mobile-header-height);
+  box-shadow: var(--shadow-xs);
+
+  position: sticky;
+  top: 0;
+  z-index: var(--z-index-header);
+}
+
+.side-template-v3__logo {
+  display: block;
+  width: 104px;
+  flex-shrink: 0;
+  text-decoration: none;
+
+  svg, img {
+    display: block;
+    width: inherit;
+  }
+}
+
+/* desktop header */
+.side-template-v3__logo-wrapper {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-index-header);
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    transform: translateY(100%);
+    width: 100%;
+    height: 30px;
+    background: linear-gradient(to bottom, var(--color-bg-dark), alpha(var(--color-bg-dark), 0));
+    pointer-events: none;
+  }
+}
+
+.side-template-v3__desktop-header {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-index-header);
+
+  display: flex;
+  align-items: center;
+
+  background: alpha(var(--color-bg), 0.9);
+  backdrop-filter: blur(10px);
+  height: var(--side-template-desktop-header-height);
+
+  border-bottom: 1px solid var(--color-border-alpha); /* remember to update also .side-template-v3::after 👇 */
+  font-size: 1rem;
+}
+
+/* main */
+.side-template-v3__main {
+  background-color: var(--color-bg);
+}
+
+/* footer */
+.side-template-v3__footer {
+  background-color: var(--color-bg);
+}
+
+@include breakpoint(md) {
+  .side-template-v3 {
+    background: linear-gradient(to right, var(--color-bg-dark) 50%, var(--color-bg) 50%);
+
+    &::after { /* extended header (right) background visible on bigger screens */
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 50%;
+      width: 50%;
+      height: var(--side-template-desktop-header-height);
+      border-bottom: 1px solid var(--color-border-alpha); /* 👆 same as .side-template-v3__desktop-header */
+    }
+  }
+
+  .side-template-v3__mobile-header {
+    display: none;
+  }
+
+  .side-template-v3__main {
+    min-height: 100vh;
+  }
+
+  .side-template-v3__footer {
+    background-color: var(--color-bg-dark);
+  }
+}

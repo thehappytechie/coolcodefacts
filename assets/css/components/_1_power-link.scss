@@ -1,0 +1,29 @@
+@use '../base' as *;
+
+/* -------------------------------- 
+
+File#: _1_power-link
+Title: Power Link
+Descr: A link effect
+Usage: codyhouse.co/license
+
+-------------------------------- */
+
+.power-link {
+  text-decoration: none;
+  color: inherit;
+  padding: var(--space-sm);
+
+  background-color: var(--color-bg-light);
+  box-shadow: var(--inner-glow), var(--shadow-sm);
+  border-radius: var(--radius-md);
+
+  transition: .3s;
+
+  &:hover {
+    color: var(--color-primary);
+    
+    background-color: var(--color-bg-lighter);
+    box-shadow: var(--inner-glow), var(--shadow-md);
+  }
+}
